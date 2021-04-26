@@ -1,23 +1,26 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Pick Local</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 class="text-6xl text-blue-200" >
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+      <div className={styles.main}>
+        <div className="text-6xl">
+          <span className="mr-4">
+            <Image
+              src="/cherries-512x512.png"
+              width="64px"
+              height="64px"
+            ></Image>
+          </span>
+          Pick Local
+        </div>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
@@ -48,7 +51,7 @@ export default function Home() {
             </p>
           </a>
         </div>
-      </main>
+      </div>
 
       <footer className={styles.footer}>
         <a
@@ -56,10 +59,10 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
-  )
+  );
 }
