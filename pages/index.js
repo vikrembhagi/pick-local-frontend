@@ -1,8 +1,11 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
+import axios from "axios";
+import { fetchAdminJWT } from "../lib/utils";
 
-export default function Home() {
+export default function Home(farmListdata, testData) {
+  console.log(farmListdata);
   return (
     <div>
       <Head>
@@ -65,4 +68,21 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export async function getStaticProps({ props }) {
+  //Get a new JWT Token - For testing hardcoding the JWT below
+  const authData = await fetchAdminJWT();
+  const { data } = await axios.get(process.env.DB_HOST + "/farms", {
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE5NzYzNTU2LCJleHAiOjE2MjIzNTU1NTZ9.mAwERoIbEG_eAu8ArdoMkXfWl9nclTLEJ2fbyJfMfpQ",
+    },
+  });
+
+  return {
+    props: {
+      data,
+    },
+  };
 }
