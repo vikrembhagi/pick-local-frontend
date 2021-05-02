@@ -3,8 +3,9 @@ import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import axios from "axios";
 import { fetchAdminJWT } from "../lib/utils";
+import FarmTile from "../components/farmTile";
 
-export default function Home(farmListdata, testData) {
+export default function Home(farmListdata) {
   console.log(farmListdata);
   return (
     <div>
@@ -13,59 +14,25 @@ export default function Home(farmListdata, testData) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.main}>
+      <div className="flex flex-col justify-center items-center pt-6">
         <div className="text-6xl">
-          <span className="mr-4">
+          <span className="mr-6">
             <Image
               src="/cherries-512x512.png"
-              width="64px"
-              height="64px"
+              width="32px"
+              height="32px"
             ></Image>
           </span>
           Pick Local
+          <span className="ml-6">
+            <Image src="/farmer-512x512.png" width="32px" height="32px"></Image>
+          </span>
         </div>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <div className="text-3xl text-black mt-16 mb-8">Your local farms</div>
+        {farmListdata.data.map((farm) => (
+          <FarmTile farmInfo={farm} />
+        ))}
       </div>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   );
 }
