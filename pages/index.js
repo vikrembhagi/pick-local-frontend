@@ -28,9 +28,9 @@ export default function Home(farmListdata) {
             <Image src="/farmer-512x512.png" width="32px" height="32px"></Image>
           </span>
         </div>
-        <div className="text-3xl text-black mt-16 mb-8">Your local farms</div>
-        {farmListdata.data.map((farm) => (
-          <FarmTile farmInfo={farm} />
+        <div className="text-3xl text-black mt-16 mb-8">Your local produce</div>
+        {farmListdata.data.map((farm, key) => (
+          <FarmTile key={key} farmInfo={farm} />
         ))}
       </div>
     </div>

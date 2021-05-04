@@ -10,6 +10,7 @@ const StrapiImage = ({ image, width, height }) => {
       alt={image.alternativeText || image.name}
       width={width}
       height={height}
+      className="rounded-lg rounded-r-none"
     />
   );
 };
