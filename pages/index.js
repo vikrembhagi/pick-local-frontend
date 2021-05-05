@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import axios from "axios";
-import { fetchAdminJWT } from "../lib/utils";
+import { fetchAdminJWT, getAllFarmsData } from "../lib/utils";
 import FarmTile from "../components/farmTile";
 
 export default function Home(farmListdata) {
@@ -14,7 +14,7 @@ export default function Home(farmListdata) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex flex-col justify-center items-center pt-6">
+      <div className="flex flex-col justify-start items-center pt-6 bg-home-bg h-screen">
         <div className="text-6xl">
           <span className="mr-6">
             <Image
@@ -29,9 +29,14 @@ export default function Home(farmListdata) {
           </span>
         </div>
         <div className="text-3xl text-black mt-16 mb-8">Your local produce</div>
-        {farmListdata.data.map((farm, key) => (
-          <FarmTile key={key} farmInfo={farm} />
-        ))}
+
+        <div className="flex flex-col">
+          {farmListdata.data.map((farm, key) => (
+            <div className="flex-1">
+              <FarmTile key={key} farmInfo={farm} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -40,12 +45,7 @@ export default function Home(farmListdata) {
 export async function getStaticProps({ props }) {
   //Get a new JWT Token - For testing hardcoding the JWT below
   const authData = await fetchAdminJWT();
-  const { data } = await axios.get(process.env.DB_HOST + "/farms", {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE5NzYzNTU2LCJleHAiOjE2MjIzNTU1NTZ9.mAwERoIbEG_eAu8ArdoMkXfWl9nclTLEJ2fbyJfMfpQ",
-    },
-  });
+  const data = await getAllFarmsData();
 
   return {
     props: {
