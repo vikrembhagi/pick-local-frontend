@@ -11,8 +11,8 @@ export default function FarmPage({ singleFarmData }) {
       <Head>
         <title>{singleFarmData.name}</title>
       </Head>
-      <div className="flex flex-col m-16 w-100vw min-h-screen">
-        <div className="flex flex-col ">
+      <div className="flex flex-col w-100vw min-h-screen">
+        <div className="flex flex-col bg-gradient-to-b from-blue-400 to-white p-8">
           <div className="flex flex-row items-center">
             <div className="flex-none ">
               <div className="rounded-[50%]">
@@ -24,14 +24,16 @@ export default function FarmPage({ singleFarmData }) {
                 />
               </div>
             </div>
-            <div className="flex flex-col ml-6">
-              <div className="text-4xl mb-8 ">{singleFarmData.name}</div>
+            <div className="flex flex-col ml-6 ">
+              <div className="text-4xl mb-8 font-medium">
+                {singleFarmData.name}
+              </div>
               <div className="text-base">{singleFarmData.about_short}</div>
             </div>
           </div>
         </div>
-        <div className="flex flex-row mt-6">
-          <div className="flex flex-col flex-none w-[200px] bg-white p-6">
+        <div className="flex flex-row p-8">
+          <div className="flex flex-col flex-none w-[200px] p-6">
             <div className="font-medium">Contact</div>
             <div>{singleFarmData.address} </div>
             <div className="font-medium mt-4">Last Updated</div>
