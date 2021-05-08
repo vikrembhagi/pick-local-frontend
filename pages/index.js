@@ -4,6 +4,7 @@ import Image from "next/image";
 import axios from "axios";
 import { fetchAdminJWT, getAllFarmsData } from "../lib/utils";
 import FarmTile from "../components/farmTile";
+import Link from "next/link";
 
 export default function Home(farmListdata) {
   console.log(farmListdata);
@@ -28,12 +29,16 @@ export default function Home(farmListdata) {
             <Image src="/farmer-512x512.png" width="32px" height="32px"></Image>
           </span>
         </div>
-        <div className="text-3xl text-black mt-16 mb-8">Your local produce</div>
+        <div className="text-3xl text-black mt-16 mb-12">Your local farms</div>
 
         <div className="flex flex-col">
           {farmListdata.data.map((farm, key) => (
             <div className="flex-1">
-              <FarmTile key={key} farmInfo={farm} />
+              <Link href={`/farm/${farm.farm_id}`}>
+                <div>
+                  <FarmTile key={key} farmInfo={farm} />
+                </div>
+              </Link>
             </div>
           ))}
         </div>
