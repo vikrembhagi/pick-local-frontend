@@ -5,7 +5,7 @@ export default function ProductTile(singleProductInfo) {
   const selectedGood = singleProductInfo.singleProductInfo;
   console.log(selectedGood.goodsTitle);
   return (
-    <div className="w-[400px] h-[200px] bg-white mb-6 mr-6 p-6 pl-4 flex flex-row items-center ">
+    <div className="w-[400px] h-[200px] bg-white mb-6 mr-6 p-6 pl-4 flex flex-row items-center rounded-lg">
       <div className=" flex-none">
         <GoodImage
           category={selectedGood.goodsCategory}
@@ -21,7 +21,10 @@ export default function ProductTile(singleProductInfo) {
           {selectedGood.goodsDescription}
         </div>
         <div className=" text-xs">
-          <Date dateString={selectedGood.lastUpdated} />
+          <span>Updated: </span>{" "}
+          <span className="font-medium">
+            <Date dateString={selectedGood.lastUpdated} />
+          </span>
         </div>
       </div>
     </div>

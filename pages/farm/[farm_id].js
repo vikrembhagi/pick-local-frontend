@@ -3,6 +3,7 @@ import { getAllFarmsID, getSingleFarmData } from "../../lib/utils";
 import StrapiImage from "../../components/image";
 import Date from "../../components/date";
 import ProductTile from "../../components/productTile";
+import Link from "next/link";
 
 export default function FarmPage({ singleFarmData }) {
   console.log(singleFarmData);
@@ -11,8 +12,8 @@ export default function FarmPage({ singleFarmData }) {
       <Head>
         <title>{singleFarmData.name}</title>
       </Head>
-      <div className="flex flex-col w-100vw min-h-screen">
-        <div className="flex flex-col bg-gradient-to-b from-blue-400 to-white p-8">
+      <div className="flex flex-col w-100vw min-h-screen bg-yellow-100">
+        <div className="flex flex-col bg-gradient-to-b from-blue-400 to-yellow-100 p-8 ">
           <div className="flex flex-row items-center">
             <div className="flex-none ">
               <div className="rounded-[50%]">
@@ -25,6 +26,12 @@ export default function FarmPage({ singleFarmData }) {
               </div>
             </div>
             <div className="flex flex-col ml-6 ">
+              <div className=" text-blue-800 underline mb-2">
+                {" "}
+                <Link href={`/`}>
+                  <a>All Farms</a>
+                </Link>
+              </div>
               <div className="text-4xl mb-8 font-medium">
                 {singleFarmData.name}
               </div>
