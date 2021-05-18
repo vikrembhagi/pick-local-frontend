@@ -50,10 +50,7 @@ export default function Home(farmListdata) {
 export async function getStaticProps({ props }) {
   //Get a new JWT Token - For testing hardcoding the JWT below
   //const authData = await fetchAdminJWT();
-  //console.log(authData);
   const data = await getAllFarmsData();
-  console.log(data);
-
   return {
     props: {
       data,

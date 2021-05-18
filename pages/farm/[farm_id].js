@@ -6,7 +6,6 @@ import ProductTile from "../../components/productTile";
 import Link from "next/link";
 
 export default function FarmPage({ singleFarmData }) {
-  console.log(singleFarmData);
   return (
     <div>
       <Head>
@@ -52,7 +51,6 @@ export default function FarmPage({ singleFarmData }) {
             <div className="text-xl mb-6 font-medium">Availaible Produce</div>
             <div className="flex flex-row flex-wrap">
               {singleFarmData.goods_inventories.map((good, key) => {
-                console.log(good);
                 return (
                   <div key={key}>
                     <ProductTile singleProductInfo={good} />

@@ -3,9 +3,8 @@ import Date from "./date";
 
 export default function ProductTile(singleProductInfo) {
   const selectedGood = singleProductInfo.singleProductInfo;
-  console.log(selectedGood.goodsTitle);
   return (
-    <div className="w-[600px] h-[200px] bg-white mb-6 mr-6 p-6 pl-4 flex flex-row items-center rounded-lg">
+    <div className="w-[500px] h-[200px] bg-white mb-6 mr-6 p-6 pl-4 flex flex-row items-center rounded-lg">
       <div className=" flex-none">
         <GoodImage
           category={selectedGood.goodsCategory}

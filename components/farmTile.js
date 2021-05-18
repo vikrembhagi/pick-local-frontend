@@ -3,7 +3,7 @@ import GoodImage from "./goodImage";
 
 export default function FarmTile({ farmInfo }) {
   return (
-    <div className="w-[500px] flex-1 flex items-center bg-white mb-8 shadow-sm rounded-lg hover:shadow-lg hover:cursor-pointer p-4">
+    <div className="w-[500px] flex-1 flex items-center mb-8 shadow-sm rounded-lg bg-white hover:shadow-lg hover:cursor-pointer p-4">
       <div className="flex justify-center">
         <StrapiImage
           image={farmInfo.profile_photo}
