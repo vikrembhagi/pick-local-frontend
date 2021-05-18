@@ -2,7 +2,10 @@ import { getStrapiMedia } from "../lib/media";
 import Image from "next/image";
 
 const StrapiImage = ({ image, width, height, styling }) => {
-  const imageUrl = getStrapiMedia(image);
+  console.log("In strapi Media");
+  console.log(image);
+  const imageUrl = getStrapiMedia(image[0]);
+  console.log(imageUrl);
 
   return (
     <Image

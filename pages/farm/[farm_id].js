@@ -25,7 +25,7 @@ export default function FarmPage({ singleFarmData }) {
                 />
               </div>
             </div>
-            <div className="flex flex-col ml-6 ">
+            <div className="flex flex-col ml-8 ">
               <div className=" text-blue-800 underline mb-2">
                 {" "}
                 <Link href={`/`}>
@@ -48,10 +48,10 @@ export default function FarmPage({ singleFarmData }) {
               <Date dateString={singleFarmData.updated_at} />{" "}
             </div>
           </div>
-          <div className="flex flex-col ml-6">
+          <div className="flex flex-col ml-8">
             <div className="text-xl mb-6 font-medium">Availaible Produce</div>
             <div className="flex flex-row flex-wrap">
-              {singleFarmData.goods_inventory_ids.map((good, key) => {
+              {singleFarmData.goods_inventories.map((good, key) => {
                 console.log(good);
                 return (
                   <div key={key}>

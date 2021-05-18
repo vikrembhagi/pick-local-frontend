@@ -19,7 +19,7 @@ export default function FarmTile({ farmInfo }) {
           Availaible
         </div>
         <div className="flex mt-2">
-          {farmInfo.goods_inventory_ids.map((good, key) => (
+          {farmInfo.goods_inventories.map((good, key) => (
             <div
               key={key}
               className="flex flex-col justify-center items-center mr-6"
