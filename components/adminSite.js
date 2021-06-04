@@ -50,7 +50,7 @@ export default function SiteConfig(props) {
       </div>
 
       <div className="flex flex-col-reverse md:flex-row lg:flex-row pl-5 gap-6">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 mr-8">
           <div>
             <div className="text-sm font-medium pb-2 text-gray-600">
               Display Name

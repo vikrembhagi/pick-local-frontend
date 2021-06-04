@@ -54,9 +54,7 @@ export default function Admin(initialData) {
       </Head>
       <div className="flex flex-col h-screen">
         <div className="p-4 bg-yellow-600 shadow-lg flex flex-row items-center">
-          <div className="text-white text-lg font-regular">
-            Manage your store
-          </div>
+          <div className="text-white text-lg font-regular">Administration</div>
           <div className="ml-auto">
             {!session && (
               <div className="flex flex-row items-center">
