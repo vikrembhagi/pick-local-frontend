@@ -3,13 +3,41 @@ import { signIn, signOut, useSession, getSession } from "next-auth/client";
 import axios from "axios";
 import Link from "next/link";
 import Date from "../../components/date";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import SiteConfig from "../../components/adminSite";
 
 export default function Admin(initialData) {
   const selectedFarmInfo = initialData.farmInfo[0];
   const [session, loading] = useSession();
-  console.log("initialData");
-  console.log(initialData);
+  const [activeTab, setActiveTab] = useState("site");
+  const [siteInfo, setSiteInfo] = useState();
+
+  useEffect(() => {
+    console.log(initialData);
+    console.log("this is session data");
+    console.log(session);
+
+    async function farmDataSet() {
+      if (session !== null) {
+        console.log(session);
+        const newSession = await getActiveSessionInfo();
+        console.log(newSession);
+        console.log("I should be called because session is active");
+        if (newSession !== null) {
+          setSiteInfo({
+            name: selectedFarmInfo.name,
+            address: selectedFarmInfo.address,
+            about_short: selectedFarmInfo.about_short,
+            profile_photo: selectedFarmInfo.profile_photo,
+          });
+        } else {
+          console.log("not in session anymo");
+        }
+      }
+    }
+
+    farmDataSet();
+  }, [initialData]);
 
   function checkActiveTab(tabName) {
     if (tabName == activeTab) {
@@ -17,7 +45,6 @@ export default function Admin(initialData) {
     } else false;
   }
 
-  const [activeTab, setActiveTab] = useState("site");
   return (
     <div className="bg-gray-200">
       <Head>
@@ -78,8 +105,8 @@ export default function Admin(initialData) {
                 <div
                   className={
                     checkActiveTab("site")
-                      ? " text-yellow-600 p-4 text-3xl font-medium"
-                      : "p-4 text-xl text-gray-400 cursor-pointer"
+                      ? " text-yellow-600 p-2 text-3xl font-medium border-b-4 border-yellow-600"
+                      : "p-2 text-3xl text-gray-400 cursor-pointer"
                   }
                   onClick={() => setActiveTab("site")}
                 >
@@ -88,8 +115,8 @@ export default function Admin(initialData) {
                 <div
                   className={
                     checkActiveTab("inventory")
-                      ? " text-yellow-600 p-4 text-3xl font-medium"
-                      : "p-4 text-xl text-gray-400 cursor-pointer"
+                      ? " text-yellow-600 p-2 ml-4 text-3xl font-medium border-b-4 border-yellow-600"
+                      : "p-2 text-3xl text-gray-400 ml-4 cursor-pointer"
                   }
                   onClick={() => setActiveTab("inventory")}
                 >
@@ -98,9 +125,18 @@ export default function Admin(initialData) {
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-5">
+            <div className="flex-1 overflow-y-auto">
               <div>
-                {checkActiveTab("site") && <div>Active Tab is Site</div>}
+                {checkActiveTab("site") && (
+                  <div>
+                    {session && (
+                      <div>
+                        <SiteConfig currentSiteInfo={siteInfo} />
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {checkActiveTab("inventory") && (
                   <div>Active Tab is Inventory</div>
                 )}
@@ -111,6 +147,12 @@ export default function Admin(initialData) {
       </div>
     </div>
   );
+}
+
+export async function getActiveSessionInfo() {
+  const newSessionStatus = await getSession();
+  console.log(newSessionStatus);
+  return newSessionStatus;
 }
 
 export async function getServerSideProps({ req }) {

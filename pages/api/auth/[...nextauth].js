@@ -47,13 +47,11 @@ const options = {
       if (isSignIn) {
         token.jwt = user.jwt;
         token.id = user.user.username;
-        console.log(user);
       }
       return Promise.resolve(token);
     },
 
     session: async (session, user) => {
-      console.log(user);
       session.jwt = user.jwt;
       session.id = user.id;
       return Promise.resolve(session);
