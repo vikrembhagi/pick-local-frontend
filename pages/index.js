@@ -33,10 +33,10 @@ export default function Home(farmListdata) {
 
         <div className="flex flex-col">
           {farmListdata.data.map((farm, key) => (
-            <div className="flex-1">
-              <Link href={`/farm/${farm.farm_id}`}>
+            <div key={farm.farm_id} className="flex-1">
+              <Link key={key} href={`/farm/${farm.farm_id}`}>
                 <div>
-                  <FarmTile key={key} farmInfo={farm} />
+                  <FarmTile key={farm.farm_id} farmInfo={farm} />
                 </div>
               </Link>
             </div>
