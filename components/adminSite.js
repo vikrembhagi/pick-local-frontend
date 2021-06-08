@@ -40,39 +40,37 @@ export default function SiteConfig(props) {
   }
 
   return (
-    <div>
-      <div>
-        <div>
-          {editMode ? (
-            <div className="flex flex-row pb-5 pt-5 pl-5 items-left gap-6">
-              <div
-                className="p-2 border-2 bg-gray-200 shadow-md border-black rounded hover:bg-gray-300 cursor-pointer"
-                onClick={() => setEditMode(false)}
-              >
-                Cancel
-              </div>
-              <div
-                className="p-2 border-2 bg-yellow-100 shadow-md border-black rounded hover:bg-yellow-200 cursor-pointer"
-                onClick={saveSiteInfoUpdates}
-              >
-                Save
-              </div>
+    <div className="bg-gray-100 flex-col justify-center items-center shadow-md my-4">
+      <div className="flex flex-row border-gray-200 justify-center items-center ">
+        {editMode ? (
+          <div className="flex flex-row gap-4">
+            <div
+              className="p-2 text-gray-400 font-medium hover:text-gray-600 cursor-pointer"
+              onClick={() => setEditMode(false)}
+            >
+              Cancel
             </div>
-          ) : (
-            <div className="flex flex-row pb-5 pt-5 pl-5 items-left">
-              <div
-                className="p-2 border-2 bg-yellow-100 shadow-md border-black rounded hover:bg-yellow-200 cursor-pointer"
-                onClick={() => setEditMode(true)}
-              >
-                Edit Site
-              </div>
+            <div
+              className="p-2 text-gray-400 font-medium hover:text-yellow-600 cursor-pointer"
+              onClick={saveSiteInfoUpdates}
+            >
+              Save
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div>
+            <div
+              className="p-2 text-gray-400 font-medium hover:text-yellow-600 cursor-pointer"
+              onClick={() => setEditMode(true)}
+            >
+              Edit Site
+            </div>
+          </div>
+        )}
       </div>
 
-      <div className="flex flex-col-reverse md:flex-row lg:flex-row pl-5 gap-6">
-        <div className="flex flex-col gap-6 mr-8">
+      <div className="flex flex-col-reverse md:flex-row lg:flex-row p-8 bg-white gap-4">
+        <div className="flex flex-col gap-4">
           <div>
             <div className="text-sm font-medium pb-2 text-gray-600">
               Display Name
@@ -120,7 +118,7 @@ export default function SiteConfig(props) {
                 <input
                   id="address"
                   type="text"
-                  className="rounded  w-96 bg-gray-100 border-transparent focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  className="rounded w-96 bg-gray-100 border-transparent focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
@@ -134,30 +132,25 @@ export default function SiteConfig(props) {
           <div className="text-sm font-medium text-gray-600 pb-2">
             Display Image
           </div>
-          <div className="p-2 bg-gray-300">
+          <div className=" flex flex-col justify-center items-center bg-gray-100">
             <StrapiImage
               image={selectedSiteInfo.profile_photo}
-              width="200px"
-              height="200px"
-              styling="rounded-lg"
+              width="120px"
+              height="120px"
+              styling=""
             />
+
+            {editMode && (
+              <div className="flex flex-row p-1 justify-evenly">
+                <div
+                  className=" text-gray-400 font-medium hover:text-gray-600 cursor-pointer"
+                  onClick={() => setEditMode(false)}
+                >
+                  Replace
+                </div>
+              </div>
+            )}
           </div>
-          {editMode && (
-            <div className="flex flex-row gap-4 pt-4 justify-evenly">
-              <div
-                className="p-2 border-2 bg-yellow-100  shadow-md border-black rounded hover:bg-yellow-200 cursor-pointer"
-                onClick={() => setEditMode(false)}
-              >
-                Replace
-              </div>
-              <div
-                className="p-2 border-2 bg-gray-200 shadow-md border-black rounded hover:bg-red-200 cursor-pointer"
-                onClick={() => setEditMode(false)}
-              >
-                Remove
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

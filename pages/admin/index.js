@@ -53,8 +53,11 @@ export default function Admin(initialData) {
       </Head>
       <div className="flex flex-col h-screen">
         <div className="p-4 bg-yellow-600 shadow-lg flex flex-row items-center">
-          <div className="text-white text-lg font-regular">Administration</div>
-          <div className="ml-auto">
+          <div className="w-1/3"></div>
+          <div className="text-white text-lg font-medium w-1/3 flex justify-center">
+            Site Administration
+          </div>
+          <div className="flex justify-end w-1/3">
             {!session && (
               <div className="flex flex-row items-center">
                 <button
@@ -67,7 +70,8 @@ export default function Admin(initialData) {
             )}
             {session && (
               <div className="flex flex-row items-center">
-                <div className="text-white pr-4">Hi {session.id} !</div>
+                {/* 
+                <div className="text-white pr-4">Hi {session.id} !</div>*/}
                 <button
                   className="bg-yellow-400 p-2 rounded-md shadow-md font-medium border-yellow-800 border-1"
                   onClick={() => signOut()}
@@ -81,8 +85,8 @@ export default function Admin(initialData) {
 
         {session && (
           <div>
-            <div className="pl-4 pr-4 py-6 bg-gray-100 flex flex-row shadow-sm items-center">
-              <div className="flex flex-col ">
+            <div className="pl-4 pr-4 py-6 flex flex-col items-center">
+              <div className="flex flex-col justify-center items-center pb-4">
                 <div className="text-3xl pb-2">{selectedFarmInfo.name}</div>
                 <div className="pb-2 underline text-blue-500 cursor-pointer">
                   <Link
@@ -94,11 +98,13 @@ export default function Admin(initialData) {
                     <a>www.localhost:3000/farm/{selectedFarmInfo.farm_id}</a>
                   </Link>
                 </div>
+                {/*
                 <div className="text-gray-600 pb-2">
                   Last Update: <Date dateString={selectedFarmInfo.updated_at} />
                 </div>
+                */}
               </div>
-              <div className="flex flex-row ml-auto items-center">
+              <div className="flex flex-row items-center">
                 <div
                   className={
                     checkActiveTab("site")
@@ -122,22 +128,22 @@ export default function Admin(initialData) {
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto">
-              <div>
+            <div className="flex-1 flex overflow-y-auto justify-center items-center">
+              <>
                 {checkActiveTab("site") && (
-                  <div>
+                  <>
                     {session && (
-                      <div>
+                      <>
                         <SiteConfig currentSiteInfo={siteInfo} />
-                      </div>
+                      </>
                     )}
-                  </div>
+                  </>
                 )}
 
                 {checkActiveTab("inventory") && (
                   <div>Active Tab is Inventory</div>
                 )}
-              </div>
+              </>
             </div>
           </div>
         )}
