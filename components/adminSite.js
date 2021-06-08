@@ -1,5 +1,7 @@
 import StrapiImage from "../components/image";
 import { useState, useEffect } from "react";
+import { session, useSession } from "next-auth/client";
+import { postSiteConfigUpdate } from "../lib/utils";
 
 export default function SiteConfig(props) {
   const [editMode, setEditMode] = useState(false);
@@ -7,6 +9,7 @@ export default function SiteConfig(props) {
   const [displayName, setDisplayName] = useState("");
   const [address, setAddress] = useState("");
   const [profilePhoto, setProfilePhoto] = useState();
+  const [farmID, setFarmID] = useState();
 
   const selectedSiteInfo = props.currentSiteInfo;
 
@@ -16,9 +19,25 @@ export default function SiteConfig(props) {
     setDisplayName(selectedSiteInfo.name);
     setAddress(selectedSiteInfo.address);
     setProfilePhoto(selectedSiteInfo.profile_photo);
+    setFarmID(selectedSiteInfo.id);
   }, [props]);
 
-  console.log(editMode);
+  async function saveSiteInfoUpdates() {
+    const updatedSiteInfo = {
+      id: farmID,
+      name: displayName,
+      address: address,
+      profile_photo: profilePhoto,
+      about_short: aboutFarm,
+    };
+    const postResponse = await postSiteConfigUpdate(updatedSiteInfo);
+    console.log(postResponse);
+
+    if (postResponse.status == 200) {
+      setEditMode(false);
+      window.location.reload();
+    }
+  }
 
   return (
     <div>
@@ -32,7 +51,10 @@ export default function SiteConfig(props) {
               >
                 Cancel
               </div>
-              <div className="p-2 border-2 bg-yellow-100 shadow-md border-black rounded hover:bg-yellow-200 cursor-pointer">
+              <div
+                className="p-2 border-2 bg-yellow-100 shadow-md border-black rounded hover:bg-yellow-200 cursor-pointer"
+                onClick={saveSiteInfoUpdates}
+              >
                 Save
               </div>
             </div>
@@ -60,7 +82,7 @@ export default function SiteConfig(props) {
                 <input
                   id="name"
                   type="text"
-                  class="rounded w-96 bg-gray-100 border-transparent focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  className="rounded w-96 bg-gray-100 border-transparent focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
                 />
@@ -98,7 +120,7 @@ export default function SiteConfig(props) {
                 <input
                   id="address"
                   type="text"
-                  class="rounded  w-96 bg-gray-100 border-transparent focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  className="rounded  w-96 bg-gray-100 border-transparent focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />

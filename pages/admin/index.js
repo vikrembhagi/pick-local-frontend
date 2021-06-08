@@ -21,10 +21,9 @@ export default function Admin(initialData) {
       if (session !== null) {
         console.log(session);
         const newSession = await getActiveSessionInfo();
-        console.log(newSession);
-        console.log("I should be called because session is active");
         if (newSession !== null) {
           setSiteInfo({
+            id: selectedFarmInfo.id,
             name: selectedFarmInfo.name,
             address: selectedFarmInfo.address,
             about_short: selectedFarmInfo.about_short,
@@ -177,8 +176,6 @@ export async function getServerSideProps({ req }) {
     console.log("caught error");
     farmInfo = {};
   }
-
   console.log(farmInfo);
-
   return { props: { farmInfo: farmInfo } };
 }
