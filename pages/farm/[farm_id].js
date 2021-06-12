@@ -17,7 +17,7 @@ export default function FarmPage({ singleFarmData }) {
             <div className="flex-none ">
               <div className="rounded-[50%]">
                 <StrapiImage
-                  image={singleFarmData.profile_photo}
+                  image={singleFarmData.profile_photo[0]}
                   width="200px"
                   height="200px"
                   styling="rounded-[50%]"
@@ -49,7 +49,7 @@ export default function FarmPage({ singleFarmData }) {
           </div>
           <div className="flex flex-col ml-8">
             <div className="text-xl mb-6 font-medium">Availaible Produce</div>
-            <div className="flex flex-row flex-wrap">
+            <div className="flex flex-row flex-wrap gap-4">
               {singleFarmData.goods_inventories.map((good, key) => {
                 return (
                   <div key={key}>

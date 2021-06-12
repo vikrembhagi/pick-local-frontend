@@ -1,7 +1,7 @@
-import StrapiImage from "../components/image";
+import StrapiImage from "../image";
 import { useState, useEffect } from "react";
 import { session, useSession } from "next-auth/client";
-import { postSiteConfigUpdate } from "../lib/utils";
+import { postSiteConfigUpdate } from "../../lib/utils";
 
 export default function SiteConfig(props) {
   const [editMode, setEditMode] = useState(false);
@@ -14,7 +14,6 @@ export default function SiteConfig(props) {
   const selectedSiteInfo = props.currentSiteInfo;
 
   useEffect(() => {
-    console.log(selectedSiteInfo);
     setAboutFarm(selectedSiteInfo.about_short);
     setDisplayName(selectedSiteInfo.name);
     setAddress(selectedSiteInfo.address);
@@ -41,9 +40,9 @@ export default function SiteConfig(props) {
 
   return (
     <div className="bg-gray-100 flex-col justify-center items-center shadow-md my-4">
-      <div className="flex flex-row border-gray-200 justify-center items-center ">
+      <div className="flex flex-row border-gray-200 justify-end items-center pr-4 ">
         {editMode ? (
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-4 ">
             <div
               className="p-2 text-gray-400 font-medium hover:text-gray-600 cursor-pointer"
               onClick={() => setEditMode(false)}
@@ -63,7 +62,7 @@ export default function SiteConfig(props) {
               className="p-2 text-gray-400 font-medium hover:text-yellow-600 cursor-pointer"
               onClick={() => setEditMode(true)}
             >
-              Edit Site
+              Edit
             </div>
           </div>
         )}
@@ -101,7 +100,7 @@ export default function SiteConfig(props) {
                   class="rounded w-96 h-36 bg-gray-100 border-transparent focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   value={aboutFarm}
                   onChange={(e) => setAboutFarm(e.target.value)}
-                  maxLength="200"
+                  maxLength="500"
                 ></textarea>
               </div>
             ) : (
@@ -134,7 +133,7 @@ export default function SiteConfig(props) {
           </div>
           <div className=" flex flex-col justify-center items-center bg-gray-100">
             <StrapiImage
-              image={selectedSiteInfo.profile_photo}
+              image={selectedSiteInfo.profile_photo[0]}
               width="120px"
               height="120px"
               styling=""

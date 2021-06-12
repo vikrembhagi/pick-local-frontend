@@ -4,22 +4,20 @@ import axios from "axios";
 import Link from "next/link";
 import Date from "../../components/date";
 import { useState, useEffect } from "react";
-import SiteConfig from "../../components/adminSite";
+import SiteConfig from "../../components/admin/siteConfig";
+import InventoryConfig from "../../components/admin/inventoryConfig";
 
 export default function Admin(initialData) {
   const selectedFarmInfo = initialData.farmInfo[0];
   const [session, loading] = useSession();
   const [activeTab, setActiveTab] = useState("site");
   const [siteInfo, setSiteInfo] = useState();
+  const [inventoryInfo, setInventoryInfo] = useState([]);
 
   useEffect(() => {
-    console.log(initialData);
-    console.log("this is session data");
-    console.log(session);
-
-    async function farmDataSet() {
+    console.log(selectedFarmInfo);
+    async function setFarmSiteData() {
       if (session !== null) {
-        console.log(session);
         const newSession = await getActiveSessionInfo();
         if (newSession !== null) {
           setSiteInfo({
@@ -29,14 +27,14 @@ export default function Admin(initialData) {
             about_short: selectedFarmInfo.about_short,
             profile_photo: selectedFarmInfo.profile_photo,
           });
+          setInventoryInfo(selectedFarmInfo.goods_inventories);
         } else {
-          console.log("not in session anymo");
+          console.log("Logged Out");
         }
       }
     }
-
-    farmDataSet();
-  }, [initialData]);
+    setFarmSiteData();
+  }, [initialData, session]);
 
   function checkActiveTab(tabName) {
     if (tabName == activeTab) {
@@ -141,7 +139,7 @@ export default function Admin(initialData) {
                 )}
 
                 {checkActiveTab("inventory") && (
-                  <div>Active Tab is Inventory</div>
+                  <InventoryConfig goods={inventoryInfo} />
                 )}
               </>
             </div>
@@ -154,7 +152,6 @@ export default function Admin(initialData) {
 
 export async function getActiveSessionInfo() {
   const newSessionStatus = await getSession();
-  console.log(newSessionStatus);
   return newSessionStatus;
 }
 
