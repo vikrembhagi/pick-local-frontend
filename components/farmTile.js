@@ -6,7 +6,7 @@ export default function FarmTile({ farmInfo }) {
     <div className="w-[500px] flex-1 flex items-center mb-8 shadow-sm rounded-lg bg-white hover:shadow-lg hover:cursor-pointer p-4">
       <div className="flex justify-center">
         <StrapiImage
-          image={farmInfo.profile_photo}
+          image={farmInfo.profile_photo[0]}
           width="120px"
           height="120px"
           styling=""
